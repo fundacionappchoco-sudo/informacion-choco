@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a6e5c" />
+<title>Información verificada sobre el terremoto · Chocó</title>
+<meta id="meta-description" name="description" content="Información verificada sobre el terremoto en Chocó." />
+<meta property="og:type" content="website" />
+<meta id="meta-og-title" property="og:title" content="Información verificada sobre el terremoto · Chocó" />
+<meta id="meta-og-description" property="og:description" content="Dónde pedir ayuda, dónde donar y a quién llamar, con la fuente de cada dato." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a6e5c'/><path d='M12 55h13l8-27 12 45 10-31 7 13h26' fill='none' stroke='%23fff' stroke-width='8' stroke-linejoin='round' stroke-linecap='round'/></svg>" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <img id="logo-fundacion" class="logo-fundacion" src="" alt="Logo de la fundación" hidden />
+  <p class="etiqueta" id="etiqueta-fundacion">Iniciativa de [Nombre de la Fundación]</p>
+  <h1 id="titulo-principal">Información verificada</h1>
+  <p class="descripcion" id="descripcion-larga"></p>
+  <p class="meta-actualizado">
+    <span class="punto-verde">●</span>
+    Actualizado <span id="fecha-corte"></span>
+    <span id="separador-en-linea"> · </span>
+    <span id="en-linea"></span>
+  </p>
+  <button id="btn-compartir" class="btn-compartir" type="button">⬆ Compartir</button>
+</header>
+
+<main>
+
+  <div class="buscador-wrap">
+    <input type="search" id="buscador" class="buscador" placeholder="Buscar ayuda, donación o teléfono..." />
+  </div>
+
+  <!-- ===================== VISTA: CUADRÍCULA ===================== -->
+  <div id="vista-grid">
+
+    <div class="tarjetas-modo">
+      <button class="tarjeta-modo activa" id="modo-necesito" type="button" data-grupo="necesito">
+        <span class="tarjeta-modo-icono">❤️</span>
+        <span class="tarjeta-modo-texto">
+          <strong>Necesito ayuda</strong>
+          <span>Fui afectado por la situación</span>
+        </span>
+      </button>
+      <button class="tarjeta-modo" id="modo-ayudar" type="button" data-grupo="ayudar">
+        <span class="tarjeta-modo-icono">🤝</span>
+        <span class="tarjeta-modo-texto">
+          <strong>Quiero ayudar</strong>
+          <span>Donar, ser voluntario o dar un techo</span>
+        </span>
+      </button>
+    </div>
+
+    <h2 class="titulo-elige">ELIGE LO QUE NECESITAS</h2>
+    <div class="grid-categorias" id="grid-categorias"></div>
+    <p class="sin-resultados" id="sin-resultados" hidden>No encontramos nada con ese término. Prueba con otra palabra.</p>
+  </div>
+
+  <!-- ===================== VISTA: DETALLE DE CATEGORÍA ===================== -->
+  <div id="vista-detalle" hidden>
+    <button id="btn-regresar" class="btn-regresar" type="button">‹ Regresar</button>
+    <div class="detalle-encabezado">
+      <span id="detalle-icono" class="detalle-icono"></span>
+      <div>
+        <h2 id="detalle-titulo"></h2>
+        <p id="detalle-subtitulo" class="detalle-subtitulo"></p>
+      </div>
+    </div>
+    <div id="detalle-items" class="detalle-items"></div>
+    <p class="detalle-meta" id="detalle-meta"></p>
+  </div>
+
+  <section class="seccion-aviso" id="seccion-aviso-estafas">
+    <h2>Cuidado con las estafas</h2>
+    <p id="texto-aviso-estafas"></p>
+  </section>
+
+  <section class="seccion-fuentes">
+    <h2>Fuentes</h2>
+    <p id="texto-fuentes"></p>
+  </section>
+
+  <section class="seccion-sugerencia">
+    <h2>Enviar una sugerencia</h2>
+    <p id="texto-ayuda-formulario" class="ayuda-toque"></p>
+
+    <!-- Formulario ESTÁTICO para que Netlify Forms lo detecte al desplegar -->
+    <form
+      name="sugerencias-choco"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="empresa"
+      action="/gracias.html"
+      class="formulario"
+    >
+      <input type="hidden" name="form-name" value="sugerencias-choco" />
+      <p class="campo-oculto">
+        <label>No llenar este campo: <input name="empresa" /></label>
+      </p>
+      <label for="mensaje">Cuéntanos qué falta o qué está desactualizado</label>
+      <textarea id="mensaje" name="mensaje" maxlength="600" rows="4" required></textarea>
+      <button type="submit" class="btn-primario">Enviar sugerencia</button>
+    </form>
+  </section>
+
+  <section class="seccion-sobre" aria-labelledby="h-sobre">
+    <h2 id="h-sobre">Sobre esta página</h2>
+    <p id="texto-sobre-pagina"></p>
+    <p id="texto-privacidad"></p>
+    <p id="texto-derechos-autor"></p>
+    <p class="responsables">
+      Responsable: <span id="texto-responsables"></span><br />
+      Contacto: <a id="link-contacto" href="#"></a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <p id="pie-fundacion"></p>
+</footer>
+
+<!-- Botón flotante de emergencia: navega directo a #emergencias -->
+<a id="btn-emergencia-flotante" class="btn-emergencia-flotante" href="#emergencias">
+  🚨 Emergencia
+</a>
+
+
+<script src="contenido.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
